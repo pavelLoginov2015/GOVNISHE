@@ -22,7 +22,7 @@
       <div id="unity-footer">
         <div id="unity-webgl-logo"></div>
         <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">Kubezumie_NEW</div>
+        <div id="unity-build-title">Kubezumie</div>
       </div>
     </div>
     <script>
@@ -66,13 +66,14 @@
         canvas.style.height = "600px";
       }
       loadingBar.style.display = "block";
-
+      var unityI = null;
       var script = document.createElement("script");
       script.src = loaderUrl;
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
+          unityI = unityInstance;
           loadingBar.style.display = "none";
           fullscreenButton.onclick = () => {
             unityInstance.SetFullscreen(1);
@@ -83,5 +84,20 @@
       };
       document.body.appendChild(script);
     </script>
+     <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+
+     <script type="text/javascript">
+ 
+       vkBridge.send('VKWebAppInit');
+ 
+ 
+ 
+       function LoadProfile(){
+         vkBridge.send('VKWebAppGetUserInfo').then(_info =>{
+           console.log(_info);
+           unityI.SendMessage('Platform', 'OnAuthenticate', JSON.stringify(_info));
+         });
+       }
+     </script>
   </body>
 </html>
