@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | Kubezumie_NEW</title>
+    <title>Unity WebGL Player | Madness^3</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=960 height=600></canvas>
+      <canvas id="unity-canvas" width=1000 height=600></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -22,20 +22,20 @@
       <div id="unity-footer">
         <div id="unity-webgl-logo"></div>
         <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title"></div>
+        <div id="unity-build-title">Madness^3</div>
       </div>
     </div>
     <script>
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/DefenderVK.loader.js";
+      var loaderUrl = buildUrl + "/kbz_2k15.loader.js";
       var config = {
-        dataUrl: buildUrl + "/DefenderVK.data",
-        frameworkUrl: buildUrl + "/DefenderVK.framework.js",
-        codeUrl: buildUrl + "/DefenderVK.wasm",
+        dataUrl: buildUrl + "/kbz_2k15.data.br",
+        frameworkUrl: buildUrl + "/kbz_2k15.framework.js.br",
+        codeUrl: buildUrl + "/kbz_2k15.wasm.br",
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
-        productName: "",
-        productVersion: "0.1",
+        companyName: "Nobodyshot",
+        productName: "Madness^3",
+        productVersion: "1.1",
       };
 
       var container = document.querySelector("#unity-container");
@@ -62,18 +62,17 @@
           mobileWarning.style.display = "none";
         }, 5000);
       } else {
-        canvas.style.width = "960px";
+        canvas.style.width = "1000px";
         canvas.style.height = "600px";
       }
       loadingBar.style.display = "block";
-      var unityI = null;
+
       var script = document.createElement("script");
       script.src = loaderUrl;
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
-          unityI = unityInstance;
           loadingBar.style.display = "none";
           fullscreenButton.onclick = () => {
             unityInstance.SetFullscreen(1);
@@ -84,20 +83,5 @@
       };
       document.body.appendChild(script);
     </script>
-     <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
-
-     <script type="text/javascript">
- 
-       vkBridge.send('VKWebAppInit');
- 
- 
- 
-       function LoadProfile(){
-         vkBridge.send('VKWebAppGetUserInfo').then(_info =>{
-           console.log(_info);
-           unityI.SendMessage('Platform', 'OnAuthenticate', JSON.stringify(_info));
-         });
-       }
-     </script>
   </body>
 </html>
