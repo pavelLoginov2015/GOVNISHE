@@ -166,14 +166,12 @@
     }
 
     var buildUrl = "Build";
-    var streamingUrl = "https://cub2-all.nobodyshot.com/static/wasm/b25";
-
     var loaderUrl = buildUrl + "/DefenderVK.loader.js";
     var config = {
         dataUrl: buildUrl + "/DefenderVK.data.gz",
         frameworkUrl: buildUrl + "/DefenderVK.framework.js.gz",
         codeUrl: buildUrl + "/DefenderVK.wasm.gz",
-        streamingAssetsUrl: streamingUrl + "StreamingAssets",
+        streamingAssetsUrl: "StreamingAssets",
         companyName: "Nobodyshot",
         productName: "Madness^3",
         productVersion: "12.1.6",
