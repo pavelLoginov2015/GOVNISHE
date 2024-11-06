@@ -92,7 +92,15 @@
  
        vkBridge.send('VKWebAppInit');
  
- 
+       const oRequestPointerLock = Element.prototype.requestPointerLock;
+Element.prototype.requestPointerLock = async function hkRequestPointerLock(...args) {
+	try {
+		(args[0] ||= {}).unadjustedMovement = true;
+		await oRequestPointerLock.apply(this, args);
+	} catch (err) {
+		console.log(err);
+	}
+};
  
        function GetUserInfo(){
          vkBridge.send('VKWebAppGetUserInfo').then(_info =>{
@@ -102,17 +110,10 @@
        }
        function lockCursor()
        {
-        const oRequestPointerLock = Element.prototype.requestPointerLock;
-Element.prototype.requestPointerLock = async function hkRequestPointerLock(...args) {
-	try {
-		(args[0] ||= {}).unadjustedMovement = true;
-		await oRequestPointerLock.apply(this, args);
-	} catch (err) {
-		console.log(err);
-	}
-};
-};
+       console.log("scrren check lock");
+}
       
+
       function UnlockCursor(){
         document.exitPointerLock = document.exitPointerLock;
 document.exitPointerLock();
