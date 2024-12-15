@@ -21,5 +21,20 @@
         <div class="title">Cube Day Z</div>
       </div>
     </div>
+  </script>
+       <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+
+<script type="text/javascript">
+       vkBridge.send('VKWebAppInit');
+
+
+
+function ReceiveVKInfo(){
+  vkBridge.send('VKWebAppGetUserInfo').then(_info =>{
+    console.log(_info);
+    gameInstance.SendMessage('Server_basic', 'OnGetVKData', JSON.stringify(_info));
+  });
+}
+    </script>
   </body>
 </html>
